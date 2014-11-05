@@ -3,10 +3,12 @@
  * Framed Web Navigator
  * Cycle through multiple websites based on tag / category 
  * results. The browser remains on the host site 
- * while updating a unique urlwhich can be shared.
+ * while updating a unique url which can be shared.
  * Reference: Trap.it web browser
  * Target: Veria.com - Veria Living - Go Well Guide
- * 
+ *
+ * Built for Wordpress 3.7
+ * Created: October 2013
  * Author: Brad Napoliello
  */
 
@@ -14,13 +16,14 @@
 <script src="jquery-1.10.2.min.js"></script>
 
 <!-- BLOGROLL SECTION -->
-<!-- Every post's link has a url -->
 <div id="blogroll">
 	<?php 
 	if ($activity->have_posts()) : while ($activity->have_posts()) : $activity->the_post(); 
 		$index = ($paged > 1) ? (($paged - 1) * 8) + $count : $count;
 		$url = get_post_meta($post->ID, 'target-url', true);
 		?>
+
+		<!-- Every post's link has a url in the <article> under [rel] -->
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article" rel="<?php echo sanitize_title(get_the_title()); ?>">
 			<a href="javascript:void(0);" rel="<?php echo $url ?>" title="<?php the_title_attribute(); ?>" class="frame-view" post="<?php echo $index ?>">
 				<header class="article-header">
